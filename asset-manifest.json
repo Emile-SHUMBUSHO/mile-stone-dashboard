@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/mile-stone-dashboard/static/css/main.bb560c89.css",
-    "main.js": "/mile-stone-dashboard/static/js/main.d17c3862.js",
+    "main.js": "/mile-stone-dashboard/static/js/main.b4a9f114.js",
     "static/media/10.jpg": "/mile-stone-dashboard/static/media/10.9411aff9bf4ffd464476.jpg",
     "index.html": "/mile-stone-dashboard/index.html",
     "main.bb560c89.css.map": "/mile-stone-dashboard/static/css/main.bb560c89.css.map",
-    "main.d17c3862.js.map": "/mile-stone-dashboard/static/js/main.d17c3862.js.map"
+    "main.b4a9f114.js.map": "/mile-stone-dashboard/static/js/main.b4a9f114.js.map"
   },
   "entrypoints": [
     "static/css/main.bb560c89.css",
-    "static/js/main.d17c3862.js"
+    "static/js/main.b4a9f114.js"
   ]
 }
