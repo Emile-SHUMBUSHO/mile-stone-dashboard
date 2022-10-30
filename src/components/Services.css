@@ -1,0 +1,37 @@
+table{
+    background-color: #212121;
+    border-radius: 10px;
+    margin-top: 4rem;
+    color: #fff;
+
+}
+
+.table td, .table th{
+    border-top: 0px solid;
+    padding: 0.75rem;
+    color: #fff;
+}
+
+.table td img:hover{
+    cursor: pointer;
+}
+
+.updateBtn{
+    background-color: aliceblue;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:0px;
+    margin-left: 0.9rem;
+}
+
+.updateBtn:hover{
+    background-color: aliceblue;
+    border: 0px;
+}
+
+.updateBtn img{
+    width: 2rem;
+    height: 2rem;
+}
