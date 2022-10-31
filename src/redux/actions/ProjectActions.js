@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actionTypes from '../actionTypes'
+import { swerroralert, swsuccalert } from "../../components/Alerts";
 
 const ProjectActionType = {
     FETCH_PROJECT_SUCCESS: "FETCH_PROJECT_SUCCESS",
@@ -14,26 +15,45 @@ const FetchProjectAction = ()=> {
             url: '/api/projects'
 
         }).then((resp)=>{
-            console.log('projects',resp)
             dispatch({ type: ProjectActionType.FETCH_PROJECT_SUCCESS, payload: resp.data.projects})
         })
-        // try{
-        //     const res =  axios.get('/api/projects');
-        //     const { posts } = res;
-        //     dispatch({ type: FetchProjectAction.FETCH_PROJECT_SUCCESS, payload: posts})
-        // }
-        // catch(error){
-        //     if(error.response){
-        //         dispatch({
-        //             type: ProjectActionType.FETCH_PROJECT_FAIL,
-        //             payload: error.response.data.message,
-        //         });
-        //     }
-        // }
+        
     }
 }
+
+const UpdateProjectAction = (id, dataObj, navigate)=>{
+    return (dispatch)=>{
+        const auth = localStorage.getItem('auth')
+        const authParsed = JSON.parse(auth)
+        const bodyFormData = new FormData()
+        bodyFormData.append('image', dataObj.image)
+        bodyFormData.append('title', dataObj.title)
+        bodyFormData.append('description', dataObj.description)
+        axios({
+            headers: {
+                Authorization: `Bearer ${authParsed.user}`,
+                "Content-Type": "multipart/form"
+            },
+            method: 'PUT',
+            url: `/api/projects/${id}`,
+            data: bodyFormData
+        }).then((resp)=>{
+            if(resp.data.status === 200){
+                swsuccalert(resp.data.message)
+                dispatch(FetchProjectAction())
+            }else{
+                swerroralert(resp.data.message)
+            }
+            
+        }).catch((error)=>{
+            swerroralert(error.message)
+        })
+    }
+}
+
 
 export {
     FetchProjectAction,
     ProjectActionType,
+    UpdateProjectAction
 }

@@ -10,12 +10,12 @@ export function swerroralert(text){
     )
 }
 
-export function swsuccalert(){
+export function swsuccalert(title){
     return (
         Swal.fire({  
             position: 'top-end',  
             icon: 'success',  
-            title: 'Logged In successfully',  
+            title: title ? title : 'Logged In successfully',  
             showConfirmButton: false,  
             timer: 2500 
         })

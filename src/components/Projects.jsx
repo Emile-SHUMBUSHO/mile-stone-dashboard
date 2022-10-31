@@ -13,12 +13,8 @@ import LoadingSpinner from '../components/Spinner/Loader'
 export default function Projects() {
 
   const [openModel, setOpenModel] = useState(false);
-  const [data, setData] = useState(null);
-  console.log(`from fetch api: ${data}`);
-  // const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const {projects, loading} = useSelector((state)=> state.projectState);
-  const [projectId, setProjectId] = useState(0)
+  const [projct, setProjct] = useState({})
   const dispatchProject = useDispatch();
 
 
@@ -26,22 +22,6 @@ export default function Projects() {
   useEffect(() => {
 
     dispatchProject(FetchProjectAction())
-    // fetch('https://milestone-backend.herokuapp.com/api/posts')
-    // .then(response => {
-    //   console.log(`response${response}`)
-    //   if(response.ok){
-    //     return response.json()
-    //   }
-    //   throw response;
-    // }).then(data => {
-    //   console.log(`data${data.posts}`)
-    //   setData(data);
-    // }).catch(error =>{
-    //   console.log("error fetching data", error);
-    //   setError(error);
-    // }).finally(()=>{
-    //   setLoading(false);
-    // });
 
     const sr = scrollreveal({
       origin: "bottom",
@@ -62,9 +42,7 @@ export default function Projects() {
       }
     );
   }, []);
-const handleUpdate = (id)=>{
-  console.log('project id', id)
-}
+
   return (
     <>
     {loading ? (<LoadingSpinner/>): (
@@ -97,8 +75,8 @@ const handleUpdate = (id)=>{
                   <th scope="row">{++index}</th>
                   <td>{project.title}</td>
                   <td>{project.description}</td>
-                  <td><img src={project.image}/></td>
-                  <td><img onClick={()=> {setOpenModel(true); handleUpdate(project.id); setProjectId(project.id)}} src={updateImg} alt="Update" width="30px" height="30px"/></td>
+                  <td><img src={project.image} style={{height: 80}}/></td>
+                  <td><img onClick={()=> {setOpenModel(true); setProjct(project)}} src={updateImg} alt="Update" width="30px" height="30px"/></td>
                   <td><img src={deleteImg} alt="Update" width="30px" height="30px"/></td>
                 </tr>
               ))}
@@ -106,7 +84,7 @@ const handleUpdate = (id)=>{
             </tbody>
     </table>
    
-        <Model open={openModel} onClose={()=>setOpenModel(false)} id={projectId} />
+        <Model open={openModel} onClose={()=>setOpenModel(false)} project={projct} setOpenModel={setOpenModel}/>
 
     </Section>
     )}
