@@ -6,13 +6,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import updateImg from '../assets/update.png';
 import deleteImg from '../assets/delete.png';
-import Model from "./ProjectModel";
+import {Model, DeleteModel} from "./ProjectModel";
 import { FetchProjectAction } from "../redux/actions/ProjectActions";
 import LoadingSpinner from '../components/Spinner/Loader'
 
 export default function Projects() {
 
   const [openModel, setOpenModel] = useState(false);
+  const [openDModel, setOpenDModel] = useState(false);
   const {projects, loading} = useSelector((state)=> state.projectState);
   const [projct, setProjct] = useState({})
   const dispatchProject = useDispatch();
@@ -77,7 +78,7 @@ export default function Projects() {
                   <td>{project.description}</td>
                   <td><img src={project.image} style={{height: 80}}/></td>
                   <td><img onClick={()=> {setOpenModel(true); setProjct(project)}} src={updateImg} alt="Update" width="30px" height="30px"/></td>
-                  <td><img src={deleteImg} alt="Update" width="30px" height="30px"/></td>
+                  <td><img src={deleteImg} onClick={()=> {setOpenDModel(true); setProjct(project)}} alt="" width="30px" height="30px"/></td>
                 </tr>
               ))}
                 
@@ -85,6 +86,7 @@ export default function Projects() {
     </table>
    
         <Model open={openModel} onClose={()=>setOpenModel(false)} project={projct} setOpenModel={setOpenModel}/>
+        <DeleteModel open={openDModel} onClose={()=>setOpenDModel(false)} project={projct} setOpenDModel={setOpenDModel}/>
 
     </Section>
     )}

@@ -51,9 +51,31 @@ const UpdateProjectAction = (id, dataObj, navigate)=>{
     }
 }
 
+const DeleteProjectAction = (id)=>{
+    return(dispatch)=>{
+        dispatch({type: actionTypes.PROJECT_DELETE_REQUEST})
+        const auth = localStorage.getItem('auth')
+        const authParsed = JSON.parse(auth)
+        axios({
+            headers: {
+                Authorization: `Bearer ${authParsed.user}`
+            },
+            method: 'DELETE',
+            url: `/api/projects/${id}`,
+        }).then((resp)=>{
+            swsuccalert(resp.data.message)
+            dispatch({type: actionTypes.PROJECT_DELETE})
+            dispatch(FetchProjectAction())
+        }).catch((error)=>{
+            dispatch({type: actionTypes.PROJECT_DELETE_FAILED})
+            swerroralert(error.message)
+        })
+    }
+}
 
 export {
     FetchProjectAction,
     ProjectActionType,
-    UpdateProjectAction
+    UpdateProjectAction,
+    DeleteProjectAction
 }

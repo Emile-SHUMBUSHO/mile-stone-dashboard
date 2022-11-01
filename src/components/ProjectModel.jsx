@@ -3,10 +3,12 @@ import close from "../assets/close2.png"
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { UpdateProjectAction } from "../redux/actions/ProjectActions";
+import { UpdateProjectAction,DeleteProjectAction } from "../redux/actions/ProjectActions";
 import { useNavigate } from "react-router-dom";
+import {LinearProgress} from "@mui/material"
+import { useSelector } from "react-redux";
 
-const Model = ({open,onClose, project, openModel, setOpenModel})=>{
+export const Model = ({open,onClose, project, setOpenModel})=>{
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [title, setTitle] = useState('')
@@ -48,7 +50,45 @@ const Model = ({open,onClose, project, openModel, setOpenModel})=>{
         </Warpper>
     );
 };
-export default Model;
+export const DeleteModel = ({open,onClose, project, setOpenDModel})=>{
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const [title, setTitle] = useState('')
+    const [desc, setDesc] = useState('')
+    const [img, setImg] = useState('')
+    const {deleting, deleted} = useSelector((state)=> state.projectState)
+
+    useEffect(()=>{
+        setTitle(project.title)
+        setDesc(project.description)
+    },[project])
+
+    const handleDelete = (id)=>{
+        dispatch(DeleteProjectAction(id))
+    }
+    
+    if(deleted) setOpenDModel(false)
+    
+    if(!open) return null;
+    return (
+        <Warpper>
+            <CloseButton>
+                <img onClick={onClose} src={close} alt="close" width="30px" height="30px"/>
+            </CloseButton>
+            <ContentContainer>
+                {deleting ? <LinearProgress/> : '' }
+                
+                <div class="mb-3 mt-3">
+                    <p style={{color: 'white'}}>Are you sure you want to delete this project?</p>
+                    <button onClick={()=> setOpenDModel(false)} style={{color: '#fff', borderRadius: 5, cursor: 'pointer'}}>Cancel</button>
+                    <button  onClick={()=>handleDelete(project.id)} style={{backgroundColor: 'crimson', color: 'white', borderRadius: 5, cursor: 'pointer'}}>Yes, Delete</button>
+                    {/* <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} class="form-control" id="title" placeholder="Project Title" name="title"/> */}
+                </div>
+            </ContentContainer>
+        </Warpper>
+    );
+};
+
 
 const Warpper = styled.div`
     height: 30rem;

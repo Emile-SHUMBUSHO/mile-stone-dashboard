@@ -25,6 +25,22 @@ const projectReducer = (state = projectState, action) => {
           loading: false,
           error: action.payload,
         }
+      case actionTypes.PROJECT_DELETE_REQUEST:
+        return {
+          ...state,
+          deleting: true
+        }
+      case actionTypes.PROJECT_DELETE:
+        return {
+          ...state,
+          deleting: false,
+          deleted: true
+        }
+      case actionTypes.PROJECT_DELETE_FAILED:
+        return {
+          ...state,
+          deleting: false
+        }
     default:
       return state;
   }
