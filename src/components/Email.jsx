@@ -4,8 +4,12 @@ import Navbar from "./Navbar";
 import scrollreveal from "scrollreveal";
 import updateImg from '../assets/update.png';
 import deleteImg from '../assets/delete.png';
+import { useSelector } from "react-redux";
+import LoadingSpinner from '../components/Spinner/Loader'
 
 export default function Email() {
+  const {loading, messages} = useSelector((state)=> state.messageState)
+  console.log('componemtmmnns', messages)
   useEffect(() => {
     const sr = scrollreveal({
       origin: "bottom",
@@ -26,6 +30,8 @@ export default function Email() {
     );
   }, []);
   return (
+    <>
+    {loading ? (<LoadingSpinner/>) : (
     <Section>
       <Nav>
       <div className="title">
@@ -42,69 +48,20 @@ export default function Email() {
                 </tr>
             </thead>
             <tbody>
+              {messages.map((message, index)=>(
                 <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <th scope="row">{++index}</th>
+                <td>{message.name}</td>
+                <td>{message.sender}</td>
+                <td>{message.message}</td>
+            </tr>
+              ))}
+                
             </tbody>
         </table>
     </Section>
+    )}
+    </>
   );
 }
 

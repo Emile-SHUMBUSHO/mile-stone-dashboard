@@ -13,6 +13,7 @@ import scrollreveal from "scrollreveal";
 import {Link, useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/AuthAction";
+import {FetchMessagesAction} from "../redux/actions/MessagesActions"
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -111,7 +112,7 @@ export default function Sidebar() {
                 className={currentLink === 4 ? "active" : "none"}
                 onClick={() => setCurrentLink(4)}
               >
-                <Link to="/dashboard/emails">
+                <Link to="/dashboard/emails" onClick={()=> {FetchMessagesAction()(dispatch)}}>
                   <BsFillChatTextFill />
                   <span> Emails</span>
                 </Link>

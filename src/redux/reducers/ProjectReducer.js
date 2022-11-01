@@ -11,8 +11,8 @@ const projectReducer = (state = projectState, action) => {
   switch (action.type) {
     case actionTypes.PROJECT_REQUEST:
       return {...state, loading:true}
+      
     case ProjectActionType.FETCH_PROJECT_SUCCESS:
-      console.log('reducers', action.payload)
       return {
         ...state,
         loading: false,
