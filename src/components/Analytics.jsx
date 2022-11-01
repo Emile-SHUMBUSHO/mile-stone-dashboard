@@ -5,7 +5,9 @@ import { IoStatsChart } from "react-icons/io5";
 import { BiGroup } from "react-icons/bi";
 import { FiActivity } from "react-icons/fi";
 import { cardStyles } from "./ReusableStyles";
+import {useSelector} from 'react-redux'
 export default function Analytics() {
+  const {projects} = useSelector((state)=>state.projectState)
   return (
     <Section>
       <div className="analytic ">
@@ -20,7 +22,7 @@ export default function Analytics() {
       <div className="analytic">
         <div className="content">
           <h5>Projects</h5>
-          <h2>4</h2>
+          <h2>{projects.length}</h2>
         </div>
         <div className="logo">
           <IoStatsChart />
