@@ -15,7 +15,7 @@ export function swsuccalert(title){
         Swal.fire({  
             position: 'top-end',  
             icon: 'success',  
-            title: title ? title : 'Logged In successfully',  
+            title,  
             showConfirmButton: false,  
             timer: 2500 
         })

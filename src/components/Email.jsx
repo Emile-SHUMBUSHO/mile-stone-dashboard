@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Navbar from "./Navbar";
 import scrollreveal from "scrollreveal";
-import updateImg from '../assets/update.png';
-import deleteImg from '../assets/delete.png';
-import { useSelector } from "react-redux";
-import LoadingSpinner from '../components/Spinner/Loader'
+import { useSelector, useDispatch } from "react-redux";
+import LoadingSpinner from '../components/Spinner/Loader';
+import { FetchMessagesAction } from "../redux/actions/MessagesActions";
 
 export default function Email() {
   const {loading, messages} = useSelector((state)=> state.messageState)
-  console.log('componemtmmnns', messages)
+  const dispatchMessage = useDispatch();
+
   useEffect(() => {
+    
+    dispatchMessage(FetchMessagesAction())
+
     const sr = scrollreveal({
       origin: "bottom",
       distance: "80px",
@@ -50,11 +52,11 @@ export default function Email() {
             <tbody>
               {messages.map((message, index)=>(
                 <tr>
-                <th scope="row">{++index}</th>
-                <td>{message.name}</td>
-                <td>{message.sender}</td>
-                <td>{message.message}</td>
-            </tr>
+                  <th scope="row">{++index}</th>
+                  <td>{message.name}</td>
+                  <td>{message.sender}</td>
+                  <td>{message.message}</td>
+               </tr>
               ))}
                 
             </tbody>

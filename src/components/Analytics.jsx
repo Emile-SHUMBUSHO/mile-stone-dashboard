@@ -5,7 +5,8 @@ import { IoStatsChart } from "react-icons/io5";
 import { BiGroup } from "react-icons/bi";
 import { FiActivity } from "react-icons/fi";
 import { cardStyles } from "./ReusableStyles";
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
+
 export default function Analytics() {
   const {projects} = useSelector((state)=>state.projectState)
   return (

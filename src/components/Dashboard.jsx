@@ -4,11 +4,9 @@ import Analytics from "./Analytics";
 import Navbar from "./Navbar";
 import scrollreveal from "scrollreveal";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const getLoggedIn = localStorage.getItem('auth')
